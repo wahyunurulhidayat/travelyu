@@ -1,43 +1,30 @@
--- phpMyAdmin SQL Dump
--- version 3.1.1
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Waktu pembuatan: 19. April 2018 jam 14:30
--- Versi Server: 5.1.30
--- Versi PHP: 5.2.8
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `wahyutravel`
+-- Database: `travelyu`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `costumer`
+-- Struktur dari tabel `customer`
 --
 
-CREATE TABLE IF NOT EXISTS `costumer` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `customer` (
+  `id` int(5) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `address` varchar(50) NOT NULL,
-  `phone` int(20) NOT NULL,
-  `gender` varchar(80) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `costumer`
---
-
+  `adress` varchar(50) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `gender` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -45,21 +32,18 @@ CREATE TABLE IF NOT EXISTS `costumer` (
 -- Struktur dari tabel `reservation`
 --
 
-CREATE TABLE IF NOT EXISTS `reservation` (
-  `id` int(20) NOT NULL,
+CREATE TABLE `reservation` (
+  `id` int(10) NOT NULL,
   `reservation_code` varchar(30) NOT NULL,
-  `reservation_at` varchar(45) NOT NULL,
-  `reservation_date` varchar(40) NOT NULL,
-  `seat_code` varchar(50) NOT NULL,
+  `reservation_at` varchar(30) NOT NULL,
+  `reservation_date` varchar(10) NOT NULL,
+  `customerid` int(30) NOT NULL,
+  `seat_code` varchar(10) NOT NULL,
+  `ruteid` varchar(30) NOT NULL,
   `depart_at` varchar(30) NOT NULL,
-  `price` int(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `reservation`
---
-
+  `price` varchar(15) NOT NULL,
+  `userid` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -67,20 +51,14 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 -- Struktur dari tabel `rute`
 --
 
-CREATE TABLE IF NOT EXISTS `rute` (
-  `id` int(20) NOT NULL,
-  `depart_at` varchar(80) NOT NULL,
-  `rute_from` varchar(50) NOT NULL,
+CREATE TABLE `rute` (
+  `id` int(5) NOT NULL,
+  `depart_at` varchar(30) NOT NULL,
+  `rute_from` varchar(30) NOT NULL,
   `rute_to` varchar(30) NOT NULL,
-  `price` int(40) NOT NULL,
-  `transportationid` varchar(70) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `rute`
---
-
+  `price` varchar(20) NOT NULL,
+  `transportationid` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -88,19 +66,13 @@ CREATE TABLE IF NOT EXISTS `rute` (
 -- Struktur dari tabel `transportation`
 --
 
-CREATE TABLE IF NOT EXISTS `transportation` (
-  `id` int(30) NOT NULL,
-  `code` varchar(20) NOT NULL,
-  `description` varchar(500) NOT NULL,
-  `seat_qty` varchar(50) NOT NULL,
-  `transportation_typeid` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `transportation`
---
-
+CREATE TABLE `transportation` (
+  `id` int(5) NOT NULL,
+  `code` int(15) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `seat_qty` varchar(10) NOT NULL,
+  `transportation_type` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -108,16 +80,10 @@ CREATE TABLE IF NOT EXISTS `transportation` (
 -- Struktur dari tabel `transportation_type`
 --
 
-CREATE TABLE IF NOT EXISTS `transportation_type` (
-  `id` int(50) NOT NULL,
-  `description` int(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `transportation_type`
---
-
+CREATE TABLE `transportation_type` (
+  `id` int(5) NOT NULL,
+  `description` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -125,15 +91,54 @@ CREATE TABLE IF NOT EXISTS `transportation_type` (
 -- Struktur dari tabel `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
+  `id` int(5) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` int(15) NOT NULL,
-  `fullname` varchar(30) NOT NULL,
-  `level` int(10) NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `password` text NOT NULL,
+  `fullname` varchar(50) NOT NULL,
+  `level` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user`
+-- Indexes for dumped tables
 --
 
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reservation`
+--
+ALTER TABLE `reservation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rute`
+--
+ALTER TABLE `rute`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transportation`
+--
+ALTER TABLE `transportation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transportation_type`
+--
+ALTER TABLE `transportation_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
