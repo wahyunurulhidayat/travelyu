@@ -15,7 +15,7 @@ class User extends CI_Controller
 	public function g_melbu()
 	{
 		$this->load->view('melbu');
-	}
+			}
 
 	public function add_input()
 	{
@@ -31,5 +31,21 @@ class User extends CI_Controller
 		 $this->Datane->submit($data);
 		 $this->load->view('welcome_message');
 	}
+	public function index(){
+		$this->load->model('Datane');
 
+		$dt['tbuser']=$this->Datane->gets();
+
+		$this->load->view('table', $dt);
+	}
+	public function add(){}
+	public function del($id){
+		$this->load->model('Datane');
+
+		$this->Datane->del($id);
+
+		redirect('user');
+	}
+	public function edit($id){}
+	public function detail($id){}
 }

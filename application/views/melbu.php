@@ -30,7 +30,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="#"><b>Travelyu</b> Melbu</a>
+    <a href="#"><b>Travelyu</b> Asup</a>
   </div>
 
   <div class="register-box-body">
@@ -63,7 +63,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Melbu</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Asup</button>
         </div>
         <!-- /.col -->
       </div>
@@ -71,6 +71,9 @@
     <a href="#" class="text-center">Klik nek ndue akun</a>
   </div>
   <!-- /.form-box -->
+  <div>
+    <a href="<?php echo base_url('index.php/user/index')?>">Table</a>
+  </div>
 </div>
 <!-- /.register-box -->
 
